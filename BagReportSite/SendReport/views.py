@@ -12,9 +12,10 @@ def success (request):
     reports = BagReport.objects.all()
     return render(request, 'SendReport/success.html',{'reports':reports})
 
-class BagReportCreateView (CreateView):
+class BagReportCreateView (SuccessMessageMixin,CreateView):
     model = BagReport
     fields = ('name_user','text','phone')
+    success_message = ' was created successfully'
     def get_success_url(self):
         return reverse('great')
 
