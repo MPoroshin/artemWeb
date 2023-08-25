@@ -1,10 +1,38 @@
+
 <!DOCTYPE html>
+{% extends 'SendReport/base.html' %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<p> ЗАЯВКА ОТПРАВЛЕНА</p>
+
+{% block content %}
+<h4 class="card-title">Заявка отправлена!</h4>
+{% for report in reports %}
+<div class="card" style="margin:10px">
+  {% if report.active %}
+  <div class="bg-warning">
+    {%else%}
+    <div class="bg-success">
+      {% endif %}
+  <div class="card-body" >
+    <h4 class="card-title">{{report.name_user}}</h4>
+    <p class="card-text">
+      {{report.text}}
+        </p>
+      <p class="card-text">
+        {{report.phone}}
+          </p>
+      <p class="card-text">
+        {{report.date_added}}
+          </p>
+
+</div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
 </body>
 </html>

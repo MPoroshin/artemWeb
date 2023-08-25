@@ -1,7 +1,7 @@
 {% extends 'SendReport/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <form method="post" novalidate>
+  <form method="post" noatvalide>
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">Save person</button>
