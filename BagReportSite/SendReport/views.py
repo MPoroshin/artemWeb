@@ -9,7 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 def index (request):
     return render(request, 'SendReport/base.html')
 def success (request):
-    reports = BagReport.objects.all()
+    reports = BagReport.objects.all()[::-1]
     return render(request, 'SendReport/success.html',{'reports':reports})
 
 class BagReportCreateView (SuccessMessageMixin,CreateView):
