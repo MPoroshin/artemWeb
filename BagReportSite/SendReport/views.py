@@ -9,8 +9,18 @@ from django.contrib.messages.views import SuccessMessageMixin
 def index (request):
     return render(request, 'SendReport/base.html')
 def success (request):
-    reports = BagReport.objects.all()[::-1]
+    reports = BagReport.objects.latest('id')
     return render(request, 'SendReport/success.html',{'reports':reports})
+
+def search (request):
+
+    search_query = request.GET.get('search','')
+    if search_query:
+        reports = BagReport.objects.filter(id=search_query)
+    else:
+
+        reports = BagReport.objects.all()
+    return render(request, 'SendReport/search.html',{'reports':reports})
 
 class BagReportCreateView (SuccessMessageMixin,CreateView):
     model = BagReport

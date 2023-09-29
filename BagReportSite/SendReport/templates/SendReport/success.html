@@ -9,30 +9,9 @@
 <body>
 
 {% block content %}
-<h4 class="card-title">Заявка отправлена!</h4>
-{% for report in reports %}
-<div class="card" style="margin:10px">
-  {% if report.active %}
-  <div class="bg-warning">
-    {%else%}
-    <div class="bg-success">
-      {% endif %}
-  <div class="card-body" >
-    <h4 class="card-title">{{report.name_user}}</h4>
-    <p class="card-text">
-      {{report.text}}
-        </p>
-      <p class="card-text">
-        {{report.phone}}
-          </p>
-      <p class="card-text">
-        {{report.date_added}}
-          </p>
+<h4 class="card-title">Заявка отправлена!
+  Номер вашей заявки: {{reports.id}}</h4>
 
-</div>
-  </div>
-</div>
-{% endfor %}
 {% endblock %}
 </body>
 </html>
