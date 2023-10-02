@@ -16,11 +16,20 @@ def search (request):
 
     search_query = request.GET.get('search','')
     if search_query:
+        try:
+            search_query = int(search_query)
+            reports = BagReport.objects.filter(id=search_query)
+            return render(request, 'SendReport/search.html', {'reports': reports})
+        except Exception:
+            search_query = None
+            reports = BagReport.objects.filter(id=search_query)
+            return render(request, 'SendReport/search.html', {'reports': reports})
+    else :
+        search_query = None
         reports = BagReport.objects.filter(id=search_query)
-    else:
+        return render(request, 'SendReport/search.html', {'reports': reports})
 
-        reports = BagReport.objects.all()
-    return render(request, 'SendReport/search.html',{'reports':reports})
+
 
 class BagReportCreateView (SuccessMessageMixin,CreateView):
     model = BagReport
