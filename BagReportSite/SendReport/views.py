@@ -1,40 +1,33 @@
-from django.shortcuts import render, redirect,HttpResponseRedirect, reverse
+from django.shortcuts import render, reverse
 from django.views.generic import CreateView
 from .models import BagReport
-from django.contrib import messages
-from django.urls import reverse_lazy
-from .models import BagReport
 from django.contrib.messages.views import SuccessMessageMixin
-# Create your views here.
-def index (request):
+
+
+def index(request):
     return render(request, 'SendReport/base.html')
-def success (request):
+
+
+def success(request):
     reports = BagReport.objects.latest('id')
-    return render(request, 'SendReport/success.html',{'reports':reports})
+    return render(request, 'SendReport/success.html', {'reports': reports})
 
-def search (request):
 
-    search_query = request.GET.get('search','')
-    if search_query:
-        try:
-            search_query = int(search_query)
-            reports = BagReport.objects.filter(id=search_query)
-            return render(request, 'SendReport/search.html', {'reports': reports})
-        except Exception:
-            search_query = None
-            reports = BagReport.objects.filter(id=search_query)
-            return render(request, 'SendReport/search.html', {'reports': reports})
-    else :
+def search(request):
+    search_query = request.GET.get('search', '')
+    try:
+        search_query = int(search_query)
+    except ValueError:
         search_query = None
-        reports = BagReport.objects.filter(id=search_query)
-        return render(request, 'SendReport/search.html', {'reports': reports})
+    reports = BagReport.objects.filter(id=search_query)
+    return render(request, 'SendReport/search.html', {'reports': reports})
 
 
-
-class BagReportCreateView (SuccessMessageMixin,CreateView):
+class BagReportCreateView(SuccessMessageMixin, CreateView):
     model = BagReport
-    fields = ('name_user','text','phone')
+    fields = ('name_user', 'text', 'phone')
     success_message = ' was created successfully'
+
     def get_success_url(self):
         return reverse('great')
 

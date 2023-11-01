@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SendreportConfig(AppConfig):
+class SendReportConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'SendReport'
