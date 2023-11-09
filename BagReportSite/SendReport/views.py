@@ -21,7 +21,7 @@ def search(request):
         search_query = None
     reports = BagReport.objects.filter(id=search_query)
     return render(request, 'SendReport/search.html', {'reports': reports})
-
+#aboba
 
 class BagReportCreateView(SuccessMessageMixin, CreateView):
     model = BagReport
