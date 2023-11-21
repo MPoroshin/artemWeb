@@ -6,8 +6,6 @@ from .models import BagReport
 class BagReportAdmin(admin.ModelAdmin):
     list_display = ("name_user", "date_added", 'active', 'id')
     #абобefewfewfауцауцауцацуацуа
-<<<<<<< HEAD
     # коммент в ветке
-=======
     #aboba1
->>>>>>> master
+
